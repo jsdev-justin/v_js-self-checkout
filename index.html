@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="search icon" href="#">
+    <title>Cindys 🍫 Check-out 🍓 </title>
+</head>
+<body class="app">
+   <div class="flex space-between p-1 text-shadow">
+       <h5 class="ml-3 p-1" id='date'></h5>
+       <h5>Cindys Self-Checkout</h5>
+       <h5 class="mr-3 p-1" id='time'></h5>
+   </div>
+   <div class="flex main">
+       <div class="col center flex column">
+           <h5>Scan - Item</h5>
+           <div class="scanner"></div>
+       </div>
+       <div class="col column flex">
+           <ul class="checkout-list flex-1"></ul>
+
+           <div class="section h-10 flex evenly">
+               <h2>$<span id='total'></span></h2>
+               <h5>Enter #<i class='fas fa-phone'></i></h5>
+           </div>
+       </div>
+   </div>
+   <div class="grid"></div>
+    
+
+   <script src="js/load.js"></script>
+    <script src="js/food.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
