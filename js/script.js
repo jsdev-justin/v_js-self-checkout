@@ -4,9 +4,9 @@ var removeSpans = document.querySelectorAll('.remove')
 var scanner = document.querySelector(".scanner")
 var checkoutList = document.querySelector(".checkout-list")
 var totalDOM = document.querySelector("#total");
-var beepone = new Audio("../assets/beep.mp3")
-var beeptwo = new Audio("../assets/beep2.mp3")
-var horn = new Audio('../assets/horn.mp3');
+var beepone = new Audio("assets/beep.mp3")
+var beeptwo = new Audio("assets/beep2.mp3")
+var horn = new Audio('assets/horn.mp3');
 
 var beeps = [beepone,beeptwo];
 
