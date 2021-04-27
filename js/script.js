@@ -204,7 +204,6 @@ if(mobile){
 
     dragItems.forEach(i=>{
         i.ondblclick=(e)=>{
-            alert("dbl click!")
 
             console.log(e.target)
             currentItem = {
