@@ -19,7 +19,7 @@
 .overlay{
     height:100%;
     width:100%;
-    background-image:url("/assets/vons4.jpeg");
+    background-image:url("assets/vons4.jpeg");
     background-size:contain;
     position:absolute;
     top:0;
