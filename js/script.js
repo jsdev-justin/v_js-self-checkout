@@ -200,7 +200,7 @@ function adjustTotal(price){
 
 
 
-if(window.innerWidth < 400){
+
     dragItems.forEach(i=>{
         i.ondblclick=(e)=>{
             alert("dbl click!")
@@ -237,7 +237,7 @@ if(window.innerWidth < 400){
             adjustTotal(currentItem.price)
         }
     })
-}
+
 
 
 
