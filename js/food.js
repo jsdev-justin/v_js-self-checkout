@@ -47,6 +47,9 @@ foods.forEach((f,idx)=>{
         foodDiv.setAttribute('data-quantity',f.quantity)
         foodDiv.setAttribute('data-price',f.price)
         foodDiv.setAttribute('data-idx',idx)
+        if(mobile){
+            foodDiv.classList.add('mobile')
+        }
         foodDiv.innerHTML = `<h4 style="pointer-events:none">${f.name}</h4><h5 style="pointer-events:none">Price:$${f.price}</h5><h5 style="pointer-events:none">Quant:<span style="pointer-events:none" class='drag-item-quantity'>${f.quantity}</span></h5>`
 
 

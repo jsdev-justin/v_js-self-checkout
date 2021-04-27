@@ -10,6 +10,7 @@ var horn = new Audio('assets/horn.mp3');
 
 var beeps = [beepone,beeptwo];
 
+
 var currentItem=""
 var checkedOutItems=[];
 var total = 0;
@@ -31,12 +32,12 @@ dragItems.forEach(d=>{
     d.ondragend=dragEnd;
 })
 
-
+if(!mobile){
 scanner.ondragover=(e)=>dragOver(e);
 scanner.ondragenter=(e)=>dragEnter(e);
 scanner.ondragleave=(e)=>dragLeave(e);
 
-
+}
 function dragStart(e){
     currentItem = {
         idx:e.target.getAttribute('data-idx'),
@@ -199,7 +200,7 @@ function adjustTotal(price){
 
 
 
-
+if(mobile){
 
     dragItems.forEach(i=>{
         i.ondblclick=(e)=>{
@@ -237,6 +238,8 @@ function adjustTotal(price){
             adjustTotal(currentItem.price)
         }
     })
+
+}
 
 
 

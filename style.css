@@ -138,3 +138,7 @@ li{
 .drag-item:hover{
     background:rgb(255,0,0,.9)
 }
+
+.mobile{
+    cursor:pointer;
+}

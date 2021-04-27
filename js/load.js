@@ -12,4 +12,7 @@ onclick=()=>{
     if(hasClicked) return;
         document.querySelector(".app").removeChild(document.querySelector(".overlay"))
         hasClicked = true;
-}   
+}  
+
+
+var mobile = confirm("are you on your mobile-device?")
