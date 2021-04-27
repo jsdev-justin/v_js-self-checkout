@@ -200,5 +200,44 @@ function adjustTotal(price){
 
 
 
+if(window.innerWidth < 400){
+    dragItems.forEach(i=>{
+        i.ondblclick=(e)=>{
+            alert("dbl click!")
+
+            console.log(e.target)
+            currentItem = {
+                idx:e.target.getAttribute('data-idx'),
+                name:e.target.getAttribute('data-name'),
+                price:e.target.getAttribute('data-price'),
+                quantity:e.target.getAttribute('data-quantity'),
+            }
+            checkedOutItems.push(currentItem);
+
+            playBeep()
+            console.log(currentItem)
+            // e.target.style.opacity = ".8"
+            var checkoutidx = document.querySelectorAll(".checkout-item");
+                checkoutidx = checkoutidx.length ? checkoutidx.length : 0
+                console.log('checkoutIdxNodeList',checkoutidx)
+        
+            if(!checkItems(currentItem)){
+                console.log(checkItems(currentItem))
+                var liItem = document.createElement("li");
+                    liItem.className='checkout-item flex space-between ml-2'
+                    liItem.innerHTML = `<span>${currentItem.name}   q:<span class='quantity'>1</span></span><p> $${currentItem.price}</p><span onclick="removeItem(${currentItem.idx},${checkoutidx})" class='remove mx-2' data-name=${currentItem.name}>x</span>`
+                    checkoutList.appendChild(liItem)
+            }
+        
+            let newQuant = parseInt(currentItem.quantity)
+                newQuant--
+            dragQuants[currentItem.idx].innerText = newQuant
+            dragItems[currentItem.idx].setAttribute('data-quantity',newQuant)
+        
+            adjustTotal(currentItem.price)
+        }
+    })
+}
+
 
 
