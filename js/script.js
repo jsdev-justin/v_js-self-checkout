@@ -4,6 +4,10 @@ var removeSpans = document.querySelectorAll('.remove')
 var scanner = document.querySelector(".scanner")
 var checkoutList = document.querySelector(".checkout-list")
 var totalDOM = document.querySelector("#total");
+var customerIdBtn = ""
+//document.querySelector("#customerid");
+var isSale = false;
+
 var beepone = new Audio("assets/beep.mp3")
 var beeptwo = new Audio("assets/beep2.mp3")
 var horn = new Audio('assets/horn.mp3');
@@ -117,7 +121,7 @@ function checkItems(currentItem){
 
 
     checkoutItemEls.forEach((item,idx)=>{
-        console.log("Itemname: ",item.name, "currentItem: ",currentItem.name)
+        // console.log("Itemname: ",item.name, "currentItem: ",currentItem.name)
         if(item.name === currentItem.name){
             isFound = true;
             ref.quantity = item.quantity,
@@ -187,14 +191,18 @@ function restoreDragQuant(quantEl,drag){
 
 function adjustTotal(price){
     console.log("Price",price)
-
+        total = Number(total)
         total += parseFloat(price);
 
         if(total < 1){
             total = 0;
         }
-
-    totalDOM.innerText = total.toFixed(2);
+    if(JSON.stringify(total).split(".")[1].length > 2){
+        console.log(total)
+        console.log(JSON.stringify(total).split(".")[1])
+        total = total.toFixed(2)
+    }
+    totalDOM.innerText = total
 }
 
 
@@ -203,7 +211,12 @@ function adjustTotal(price){
 if(mobile){
 
     dragItems.forEach(i=>{
-        i.ondblclick=(e)=>{
+        i.onclick=(e)=>{
+
+            scanner.style.opacity = .8;
+            setTimeout(()=>{
+                scanner.style.opacity = 1
+            },250)
 
             console.log(e.target)
             currentItem = {
@@ -213,6 +226,9 @@ if(mobile){
                 quantity:e.target.getAttribute('data-quantity'),
             }
             checkedOutItems.push(currentItem);
+
+            let price = currentItem.price
+
 
             playBeep()
             console.log(currentItem)
@@ -225,7 +241,22 @@ if(mobile){
                 console.log(checkItems(currentItem))
                 var liItem = document.createElement("li");
                     liItem.className='checkout-item flex space-between ml-2'
-                    liItem.innerHTML = `<span>${currentItem.name}   q:<span class='quantity'>1</span></span><p> $${currentItem.price}</p><span onclick="removeItem(${currentItem.idx},${checkoutidx})" class='remove mx-2' data-name=${currentItem.name}>x</span>`
+                    if(isSale){
+                        if(Math.random() > .3){
+                            price = (currentItem.price - (currentItem.price * .2))
+                            console.log("PRICE:",price)
+                            let fixedPrice = (currentItem.price * .2).toFixed(2);
+                    liItem.innerHTML = `<span>${currentItem.name}   q:<span class='quantity'>1</span></span><p> $${currentItem.price}  <span class='red-text'>- $</span><span class='red-text price'>${fixedPrice}</span></p><span onclick="removeItem(${currentItem.idx},${checkoutidx})" class='remove mx-2' data-name=${currentItem.name}>x</span>`
+                        }
+                        else{
+                            liItem.innerHTML = `<span>${currentItem.name}   q:<span class='quantity'>1</span></span><p> $<span class='price'>${currentItem.price}</span></p><span onclick="removeItem(${currentItem.idx},${checkoutidx})" class='remove mx-2' data-name=${currentItem.name}>x</span>`
+
+                        }
+                    }
+                    else{
+                        liItem.innerHTML = `<span>${currentItem.name}   q:<span class='quantity'>1</span></span><p> $<span class='price'>${currentItem.price}</span></p><span onclick="removeItem(${currentItem.idx},${checkoutidx})" class='remove mx-2' data-name=${currentItem.name}>x</span>`
+
+                    }
                     checkoutList.appendChild(liItem)
             }
         
@@ -234,10 +265,36 @@ if(mobile){
             dragQuants[currentItem.idx].innerText = newQuant
             dragItems[currentItem.idx].setAttribute('data-quantity',newQuant)
         
-            adjustTotal(currentItem.price)
+            adjustTotal(price)
         }
     })
 
+}
+
+
+customerIdBtn.onclick=(e)=>{
+    isSale = true;
+    e.target.style.backgroundColor='green'
+    e.target.textContent="Welcome Back"
+ 
+        
+
+    if(total !== 0){
+        let refTotal = (total - (total * .2)).toFixed(2);
+        totalDOM.innerText = refTotal;
+        var prices = document.querySelectorAll(".price");
+        prices = Array.from(prices).forEach(el=>{
+            if(Math.random() > .3){
+                let text = el.textContent;
+                // console.log(text)
+            el.innerHTML =`${el.textContent} <span class='red-text'>-</span><span class='red-text'>${(parseFloat(el.textContent) * .2).toFixed(2)}</span>`
+            }
+        })
+
+
+    }
+
+        console.log(prices)
 }
 
 

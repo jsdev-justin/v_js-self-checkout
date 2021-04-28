@@ -106,7 +106,7 @@
 
 .flex-1{
     flex-grow:1;
-    background:red;
+    /* background:red; */
     overflow:auto;
 }
 
@@ -141,4 +141,19 @@ li{
 
 .mobile{
     cursor:pointer;
+}
+
+.btn{
+    background:rgb(255,0,0,.7);
+    border-radius:100px;
+    padding:.25em;
+    cursor:pointer;
+}
+
+.btn:hover{
+    transform:scale(.99)
+}
+
+.red-text{
+    color:red;
 }

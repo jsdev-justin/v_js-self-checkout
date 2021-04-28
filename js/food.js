@@ -31,7 +31,7 @@ var foods=[
     },
     {
         name:"water",
-        price:"99",
+        price:".99",
         quantity:20,
         on_sale:false,
     },
